@@ -9,14 +9,49 @@
 
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/txt_toppings"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Toppings" />
+        android:text="@string/toppings" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcy_toppings"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         app:layoutManager="LinearLayoutManager" />
+
+
+    <TextView
+        android:id="@+id/txt_size"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/txt_size" />
+
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/swt_small"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/txt_small"
+        android:textSize="30sp"/>
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/swt_medium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/txt_medium"
+        android:textSize="30sp"/>
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/swt_large"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/txt_large"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/txt_price"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/price_txt" />
 </LinearLayout>
