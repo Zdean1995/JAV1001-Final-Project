@@ -2,24 +2,38 @@ package com.auchtermuchty.pizzatime
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import com.auchtermuchty.pizzatime.adapter.ToppingsAdapter
 import com.auchtermuchty.pizzatime.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    var price: Int = 10
+
+    //the price of the pizza
+    private var price: Int = 0
+
+    //the size of the pizza
+    private var pizzaSize: String = ""
+
+    //The full order string which will be used for adding the pizza to the full order
+    private var order: String = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
         binding.rcyToppings.adapter = ToppingsAdapter()
+
+        //adding the string array to the recylcerView adapter.  This is done here since I couldn't
+        //figure out a way to do it from inside the adapter
         (binding.rcyToppings.adapter as ToppingsAdapter).toppingsStrings =
             mutableListOf(*resources.getStringArray(R.array.toppings))
 
-        binding.txtPrice.text = getString(R.string.price_txt, 0)
 
+        //on click listeners for each of the size switches.  They all make it so you can't hit themselves again
+        //and it unchecks the other two and makes them clickable again.
         binding.swtLarge.setOnClickListener{
             binding.swtMedium.isClickable = true
             binding.swtMedium.isChecked = false
@@ -27,6 +41,7 @@ class MainActivity : AppCompatActivity() {
             binding.swtSmall.isChecked = false
             binding.swtLarge.isClickable = false
             price = 10
+            pizzaSize = "Large"
             calculatePrice()
         }
 
@@ -37,6 +52,7 @@ class MainActivity : AppCompatActivity() {
             binding.swtSmall.isChecked = false
             binding.swtMedium.isClickable = false
             price = 8
+            pizzaSize = "Medium"
             calculatePrice()
         }
 
@@ -47,14 +63,39 @@ class MainActivity : AppCompatActivity() {
             binding.swtMedium.isChecked = false
             binding.swtSmall.isClickable = false
             price = 6
+            pizzaSize = "Small"
             calculatePrice()
         }
 
-        binding.swtLarge.callOnClick()
+        //The on click listener for the add to order button.  This will do more later
+        binding.btnAddToOrder.setOnClickListener {
+            val toast = Toast.makeText(this, "$order added to order", Toast.LENGTH_SHORT)
+            toast.show()
+        }
 
+        //finally, sets the default option for pizza size to large
+        binding.swtLarge.isChecked = true
+        binding.swtLarge.callOnClick()
     }
 
-    fun calculatePrice(){
-        binding.txtPrice.text = getString(R.string.price_txt, (binding.rcyToppings.adapter as ToppingsAdapter).toppingsCount + price)
+    //The method for calculating the price and updating the UI
+    private fun calculatePrice(){
+
+        //this is needed to make the text more readable and also to the list isn't a reference to the one in the adapter
+        val toppingsList: MutableList<String> = mutableListOf()
+        toppingsList.addAll((binding.rcyToppings.adapter as ToppingsAdapter).selectedToppingsStrings)
+
+        binding.txtPrice.text = getString(R.string.price_txt, (toppingsList.count() * 2) + price)
+
+        when(toppingsList.count()) {
+            0 -> binding.txtPizza.text = resources.getString(R.string.pizzaNoToppings, pizzaSize)
+            1 -> binding.txtPizza.text = resources.getString(R.string.pizzaOneTopping, pizzaSize, toppingsList[0])
+            else -> {
+                val lastTopping = toppingsList.removeLast()
+                val toppings = toppingsList.joinToString()
+                binding.txtPizza.text = resources.getString(R.string.pizzaManyTopping, pizzaSize, toppings, lastTopping)
+            }
+        }
+        order = binding.txtPizza.text.toString()
     }
 }

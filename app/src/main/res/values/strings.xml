@@ -5,5 +5,9 @@
     <string name="txt_medium">12cm: $8</string>
     <string name="txt_large">14cm: $10</string>
     <string name="txt_size">Size</string>
-    <string name="toppings">Toppings</string>
+    <string name="toppings">Toppings - $2 Each</string>
+    <string name="pizzaNoToppings">%s Cheese Pizza</string>
+    <string name="pizzaOneTopping">%s %s Pizza</string>
+    <string name="pizzaManyTopping">%s %s, and %s Pizza</string>
+    <string name="btn_add_to_order">Add to Order</string>
 </resources>

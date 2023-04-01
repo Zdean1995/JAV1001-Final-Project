@@ -10,9 +10,10 @@ import com.auchtermuchty.pizzatime.R
 class ToppingsAdapter:
     RecyclerView.Adapter<ToppingsAdapter.ToppingsViewHolder>() {
 
-    //https://www.techiedelight.com/convert-string-to-list-kotlin/
+    //the list of all toppings
     var toppingsStrings: MutableList<String> = mutableListOf()
-    var toppingsCount: Int = 0
+    //the list of selected toppings
+    var selectedToppingsStrings: MutableList<String> = mutableListOf()
 
     class ToppingsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val swtToppings = view.findViewById(R.id.swt_toppings) as SwitchCompat
@@ -32,10 +33,10 @@ class ToppingsAdapter:
         holder.swtToppings.text = toppingsStrings[position]
         holder.swtToppings.setOnClickListener {
             if(holder.swtToppings.isChecked){
-                toppingsCount++
+                selectedToppingsStrings.add(toppingsStrings[position])
             }
             else{
-                toppingsCount--
+                selectedToppingsStrings.remove(toppingsStrings[position])
             }
         }
     }
