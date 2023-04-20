@@ -1,5 +1,6 @@
 package com.auchtermuchty.pizzatime
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -26,7 +27,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.rcyToppings.adapter = ToppingsAdapter()
 
-        //adding the string array to the recylcerView adapter.  This is done here since I couldn't
+        //adding the string array to the recyclerView adapter.  This is done here since I couldn't
         //figure out a way to do it from inside the adapter
         (binding.rcyToppings.adapter as ToppingsAdapter).toppingsStrings =
             mutableListOf(*resources.getStringArray(R.array.toppings))
@@ -69,8 +70,12 @@ class MainActivity : AppCompatActivity() {
 
         //The on click listener for the add to order button.  This will do more later
         binding.btnAddToOrder.setOnClickListener {
-            val toast = Toast.makeText(this, "$order added to order", Toast.LENGTH_SHORT)
-            toast.show()
+            //val toast = Toast.makeText(this, "$order added to order", Toast.LENGTH_SHORT)
+            //toast.show()
+            val intent = Intent(this, OrderActivity::class.java)
+            intent.putExtra("Order", order)
+            intent.putExtra("Price", price)
+            this.startActivity(intent)
         }
 
         //finally, sets the default option for pizza size to large
