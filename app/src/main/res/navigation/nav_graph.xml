@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.auchtermuchty.pizzatime.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_createOrderFragment"
+            app:destination="@id/createOrderFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_viewOrdersFragment"
+            app:destination="@id/viewOrdersFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createOrderFragment"
+        android:name="com.auchtermuchty.pizzatime.CreateOrderFragment"
+        android:label="CreateOrderFragment" >
+        <action
+            android:id="@+id/action_createOrderFragment_to_confirmOrderFragment"
+            app:destination="@id/confirmOrderFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/confirmOrderFragment"
+        android:name="com.auchtermuchty.pizzatime.ConfirmOrderFragment"
+        android:label="fragment_confirm_order"
+        tools:layout="@layout/fragment_confirm_order" >
+        <action
+            android:id="@+id/action_confirmOrderFragment_to_viewOrdersFragment"
+            app:destination="@id/viewOrdersFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/viewOrdersFragment"
+        android:name="com.auchtermuchty.pizzatime.ViewOrdersFragment"
+        android:label="fragment_view_orders"
+        tools:layout="@layout/fragment_view_orders" />
+</navigation>
