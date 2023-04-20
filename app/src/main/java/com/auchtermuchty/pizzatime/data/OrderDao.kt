@@ -5,10 +5,10 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface OrderDao {
-    @Query("SELECT * from order ORDER BY id ASC")
+    @Query("SELECT * from orders ORDER BY id ASC")
     fun getOrders(): Flow<List<Order>>
 
-    @Query("SELECT * from order WHERE id = :id")
+    @Query("SELECT * from orders WHERE id = :id")
     fun getOrder(id: Int): Flow<Order>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
