@@ -1,15 +1,21 @@
 package com.auchtermuchty.pizzatime.data
 
-import androidx.room.*
-import kotlinx.coroutines.flow.Flow
+import androidx.lifecycle.LiveData
+import androidx.room.Dao
+import androidx.room.Delete
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
+import androidx.room.Update
 
 @Dao
 interface OrderDao {
-    @Query("SELECT * from orders ORDER BY id ASC")
-    fun getOrders(): Flow<List<Order>>
 
-    @Query("SELECT * from orders WHERE id = :id")
-    fun getOrder(id: Int): Flow<Order>
+    @Query("SELECT * FROM orders")
+    fun getOrders(): LiveData<List<Order>>
+
+    @Query("SELECT * FROM orders WHERE id = :id")
+    fun getOrder(id: Int): LiveData<Order>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(order: Order)

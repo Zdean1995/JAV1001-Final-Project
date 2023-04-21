@@ -7,8 +7,8 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "orders")
 data class Order(
-    @PrimaryKey val id: Int,
-    @NonNull @ColumnInfo(name = "order_string") val orderString: String,
-    @NonNull @ColumnInfo(name = "delivery") val delivery: Boolean,
-    @NonNull @ColumnInfo(name = "price") val price: Double
+    @PrimaryKey(autoGenerate = true) val id: Int = 0,
+    @ColumnInfo(name = "order_string") val orderString: String,
+    @ColumnInfo(name = "delivery") val delivery: Boolean,
+    @ColumnInfo(name = "price") val price: String
 )
