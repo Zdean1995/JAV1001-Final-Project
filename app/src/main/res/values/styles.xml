@@ -9,7 +9,6 @@
         <item name="android:layout_marginStart">10dp</item>
         <item name="android:layout_marginEnd">10dp</item>
         <item name="android:textSize">25sp</item>
-
     </style>
 
     <style name="txt_section_title">
